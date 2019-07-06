@@ -8,13 +8,13 @@ this is the following.
 ```
 MajorityElement(𝑎1, 𝑎2, . . . , 𝑎𝑛):
 for 𝑖 from 1 to 𝑛:
-currentElement ← 𝑎𝑖
-count ← 0
-for 𝑗 from 1 to 𝑛:
-if 𝑎𝑗 = currentElement:
-count ← count + 1
-if count > 𝑛/2:
-return 𝑎𝑖
+    currentElement ← 𝑎𝑖
+    count ← 0
+    for 𝑗 from 1 to 𝑛:
+        if 𝑎𝑗 = currentElement:
+            count ← count + 1
+        if count > 𝑛/2:
+    return 𝑎𝑖
 return “no majority element”
 ```
 
@@ -50,5 +50,6 @@ Input | Output
 --- | ---
 4 | 0
 1 2 3 1 |
+
 This sequence also does not have a majority element (note that the element 1 appears twice and hence
 is not a majority element).
