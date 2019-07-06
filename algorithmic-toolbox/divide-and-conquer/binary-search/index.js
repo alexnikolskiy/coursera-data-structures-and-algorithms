@@ -28,23 +28,24 @@ rl.once('line', line => {
     })
 });
 
-function binarySearch(arr = [], search) {
-    let left = 0;
-    let right = arr.length - 1;
+function binarySearch(arr = [], key) {
+    function search(arr, low, high, key) {
+        if (high < low) {
+            return -1;
+        }
 
-    while (left <= right) {
-        const mid = left + Math.floor((right - left) / 2);
+        const mid = low + Math.floor((high - low) / 2);
 
-        if (arr[mid] === search) {
+        if (arr[mid] === key) {
             return mid;
-        } else if (arr[mid] > search) {
-            right = mid - 1;
+        } else if (key < arr[mid]) {
+            return search(arr, low, mid - 1, key);
         } else {
-            left = mid + 1;
+            return search(arr, mid + 1, high, key);
         }
     }
 
-    return -1;
+    return search(arr, 0, arr.length - 1, key)
 }
 
 module.exports = binarySearch;
