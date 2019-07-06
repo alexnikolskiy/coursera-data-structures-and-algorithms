@@ -36,27 +36,19 @@ function max(count, capacity, values, weights) {
     let total = 0;
 
     for (let i = 0; i < count; i++) {
-        unitValues.push((values[i] / weights[i]));
+        unitValues.push({ weight: weights[i], value: values[i] / weights[i] });
     }
 
-    while (capacity !== 0) {
-        let maxPos = 0;
+    unitValues.sort((a, b) => b.value - a.value);
 
-        for (let i = 1; i < count; i++) {
-            if (weights[i] !== 0 && weights[maxPos] !== 0 && unitValues[i] > unitValues[maxPos]) {
-                maxPos = i;
-            }
-        }
+    for (let i = 0; i < unitValues.length; i++) {
+        if (capacity === 0) { break; }
 
-        const weight = Math.min(capacity, weights[maxPos]);
-
-        if (weight === 0) {
-            break;
-        }
+        const weight = Math.min(capacity, unitValues[i].weight);
 
         capacity -= weight;
-        weights[maxPos] -= weight;
-        total += unitValues[maxPos] * weight;
+        unitValues[i].weight -= weight;
+        total += unitValues[i].value * weight;
     }
 
     return parseFloat(total.toFixed(4));
